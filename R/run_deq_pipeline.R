@@ -20,6 +20,7 @@
 #'   (fraglen-readlen) is used to calculate the extension of reads for counting
 #' @param nthreads number of threads to run on (defaults to 1)
 #' @return GRanges object with peaks and estimated changes
+#' @import plyr
 #' @import dplyr 
 #' @import GenomeInfoDb
 #' @import S4Vectors
