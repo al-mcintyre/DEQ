@@ -17,11 +17,11 @@ Imports:
     GenomicFeatures (>= 1.32.2),
     GenomeInfoDb (>= 1.16.0),
     GenomicRanges (>= 1.32.6),
-    plyr (>= 1.8.4),
     QNB (>= 1.1.11),
     Rsamtools (>= 1.32.3),
     Rsubread (>= 1.30.5),
-    rtracklayer (>= 1.40.6)
+    rtracklayer (>= 1.40.6),
+    S4Vectors
 RoxygenNote: 6.1.1
 Collate: 
     'count_reads.R'
