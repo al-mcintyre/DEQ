@@ -15,7 +15,7 @@ import.peaks <- function(peak.files,anno,annot.order=annotation.order){
   return(peaks.anno)
 }
 
-annotate.peaks <- function(peaks,anno,annot.order){
+annotate.peaks <- function(loaded.peaks,anno,annot.order){
   names(loaded.peaks) <- c(paste0("peak",1:length(loaded.peaks)))
   peaks.anno <- annotateFeatures(loaded.peaks, txdb = anno$txdb,
                                    genenames = anno$genenames,
