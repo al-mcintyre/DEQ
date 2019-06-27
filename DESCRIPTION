@@ -1,0 +1,29 @@
+Package: deq
+Title: A package to conveniently run DESeq2, edgeR, and QNB for the detection of differential methylation in MeRIP/m6A-seq data.
+Version: 0.0.1
+Authors@R: person("A", "McIntyre", email = "abm237@cornell.edu", role = c("aut", "cre"))
+Description: Predicts differential methylation by implementing generalized linear models in DESeq2 or edgeR, or by running QNB. 
+Depends: R (>= 3.5.0)
+License: MIT
+Encoding: UTF-8
+LazyData: true
+Imports:
+    AnnotationDbi (>= 1.44.0),
+    BiocParallel (>= 1.14.2),
+    data.table (>= 1.11.4),
+    DESeq2 (>= 1.20.0),
+    dplyr (>= 0.7.6),
+    edgeR (>= 3.22.3),
+    GenomicFeatures (>= 1.32.2),
+    GenomeInfoDb (>= 1.16.0),
+    GenomicRanges (>= 1.32.6),
+    QNB (>= 1.1.11),
+    Rsamtools (>= 1.32.3),
+    Rsubread (>= 1.30.5),
+    rtracklayer (>= 1.40.6)
+RoxygenNote: 6.1.1
+Collate: 
+    'count_reads.R'
+    'import_peaks.R'
+    'run_tools.R'
+    'run_deq_pipeline.R'
