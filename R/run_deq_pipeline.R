@@ -30,10 +30,6 @@ deq <- function(input.bams,ip.bams,treated.input.bams,treated.ip.bams,
                 peak.files,gtf,paired.end=FALSE,outfi='deq_results.txt',
                 tool='deq',compare.gene=TRUE,readlen=100,fraglen=100,nthreads=1){
   
-  source('import_peaks.R')
-  source('count_reads.R')
-  source('run_tools.R')
-  
   if (length(input.bams) != length(ip.bams) | length(treated.input.bams) != length(treated.ip.bams)){
     stop('number of IP bam files must equal number of input bam files')
   }
