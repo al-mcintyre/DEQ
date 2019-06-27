@@ -22,6 +22,7 @@
 #' @return GRanges object with peaks and estimated changes
 #' @import dplyr 
 #' @import GenomeInfoDb
+#' @import plyr
 #' @export
 #' @include import_peaks.R count_reads.R run_tools.R
 #' @examples 
