@@ -20,7 +20,6 @@
 #'   (fraglen-readlen) is used to calculate the extension of reads for counting
 #' @param nthreads number of threads to run on (defaults to 1)
 #' @return GRanges object with peaks and estimated changes
-#' @import plyr
 #' @import dplyr 
 #' @import GenomeInfoDb
 #' @import S4Vectors
@@ -37,6 +36,7 @@ deq <- function(input.bams,ip.bams,treated.input.bams,treated.ip.bams,
   }
   n.c <- length(input.bams)
   n.t <- length(treated.input.bams)
+  extension <- fraglen-readlen
   meta.data <- data.frame(Condition=c(rep('control',n.c*2),rep('treatment',n.t*2)),
                      IP=c(rep('input',n.c),rep('IP',n.c),rep('input',n.t),rep('IP',n.t)))
   
@@ -57,7 +57,7 @@ deq <- function(input.bams,ip.bams,treated.input.bams,treated.ip.bams,
   
   #run DESeq2, edgeR, and QNB to predict changes in m6A methylation
   results <- peaks$peaks[,c("annot","main.gene")]
-  results <- run.tools(peak.counts,meta.data,tool,input.bams,ip.bams,treated.input.bams,treated.ip.bams) 
+  results <- run.tools(results,peak.counts,meta.data,tool,input.bams,ip.bams,treated.input.bams,treated.ip.bams) 
   peaks$peak.de <- run.deseq2.4l2fc(peak.counts[,which(meta.data$IP == "IP")],
                                   meta.data[which(meta.data$IP == "IP"),],'peak')
   results$peak.l2fc <- peaks$peak.de$peak.l2fc

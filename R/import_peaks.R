@@ -16,8 +16,8 @@ import.peaks <- function(peak.files,anno,annot.order=annotation.order){
 }
 
 annotate.peaks <- function(peaks,anno,annot.order){
-  names(peaks) <- c(paste0("peak",1:length(peaks)))
-  peaks.anno <- annotateFeatures(peaks, txdb = anno$txdb,
+  names(loaded.peaks) <- c(paste0("peak",1:length(loaded.peaks)))
+  peaks.anno <- annotateFeatures(loaded.peaks, txdb = anno$txdb,
                                    genenames = anno$genenames,
                                    utr5.extend = 2000,
                                    utr3.extend = 2000)
@@ -32,12 +32,12 @@ findOverlapsFeature <- function (gr, features, gene.ids, feature.name){
   hits <- data.table::as.data.table(hits)
   hits$tx_name <- names(features)[hits$subjectHits]
   hits <- merge(hits, gene.ids, by = "tx_name")
-  hits <- hits[, .(id = queryHits, gene_name)] %>% unique(by = NULL)
-  hits.arbitrary <- hits %>% unique(by = "id")
-  hits$name <- gr[hits$id]$name
-  hits <- hits[, .(name, gene_name)] %>% unique(by = NULL)
+  hits <- hits[, c("queryHits", "gene_name")] %>% unique(by = NULL)
+  hits.arbitrary <- hits %>% unique(by = "queryHits")
+  hits$name <- gr[hits$queryHits]$name
+  hits <- hits[, c("name", "gene_name")] %>% unique(by = NULL)
   mcols(gr)[, feature.name] <- as.character(NA)
-  mcols(gr)[hits.arbitrary$id, feature.name] <- hits.arbitrary$gene_name
+  mcols(gr)[hits.arbitrary$queryHits, feature.name] <- hits.arbitrary$gene_name
   return(list(gr = gr, hits = hits))
 }
 
