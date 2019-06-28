@@ -119,7 +119,7 @@ prioritizeAnnotations <- function (gr, feature.order, genenames){
                   paste0(feature.order, collapse = ", ")))
   feature.diff <- setdiff(feature.order, colnames(mcols(gr)))
   if (length(feature.diff) > 0) {
-    message(sprintf("warning: these annotations are not avaiable: %s", 
+    message(sprintf("warning: these annotations are not available: %s", 
                     paste0(feature.diff, collapse = ", ")))
   }
   feature.order <- feature.order[feature.order %in% colnames(mcols(gr))]
@@ -134,8 +134,8 @@ prioritizeAnnotations <- function (gr, feature.order, genenames){
   strand.table <- as.data.frame(genenames)
   row.names(strand.table) <- make.names(genenames$gene_name,unique=TRUE)
   assign.feature <- !is.na(mcols(gr)[, "annot"]) & mcols(gr)[, "annot"] != "intergenic"
-  strand(gr[assign.feature,]) <- strand.table[gsub('-','.',mcols(gr)[assign.feature,"main.gene"]),"strand"]
-  mcols(gr)[assign.feature, "main.gene.id"] <- strand.table[gsub('-','.',mcols(gr)[assign.feature,"main.gene"]),"gene_id"]
+  strand(gr[assign.feature,]) <- strand.table[gsub('-','.',make.names(mcols(gr)[assign.feature,"main.gene"])),"strand"]
+  mcols(gr)[assign.feature, "main.gene.id"] <- strand.table[gsub('-','.',make.names(mcols(gr)[assign.feature,"main.gene"])),"gene_id"]
   
   assign.feature <- is.na(mcols(gr)[, "annot"])
   mcols(gr)[assign.feature, "annot"] <- "intergenic"
