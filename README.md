@@ -10,3 +10,5 @@ deq(input.bams, ip.bams, treated.input.bams, treated.ip.bams, peak.files,
   compare.gene = TRUE, readlen = 100, fraglen = 100, nthreads = 1)
   ```
 (see ?deq for details)
+
+May need to import S4Vectors separately - I've had some issues `library(S4Vectors)`
