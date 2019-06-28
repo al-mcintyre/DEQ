@@ -24,7 +24,7 @@
 #' @import GenomeInfoDb
 #' @import S4Vectors
 #' @export
-#' @include import_peaks.R count_reads.R run_tools.R
+#' @include import_peaks.R count_reads.R run_tools.R metdiff_function_copy.R
 #' @examples 
 
 deq <- function(input.bams,ip.bams,treated.input.bams,treated.ip.bams,
@@ -73,6 +73,8 @@ deq <- function(input.bams,ip.bams,treated.input.bams,treated.ip.bams,
     results$diff.l2fc <- results$peak.l2fc - results$gene.l2fc 
   }
   
+  colnames(peak.counts) <- make.names(paste0(meta.data$Condition,"_",meta.data$IP),unique=TRUE)
+  write.table(peak.counts,gsub('.txt','.counts.txt',outfi),quote = FALSE,sep='\t',row.names = TRUE,col.names=TRUE)
   write.table(results,outfi,quote = FALSE,sep='\t',row.names = FALSE,col.names=TRUE)
   return(results)
 }

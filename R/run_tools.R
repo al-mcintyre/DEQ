@@ -10,6 +10,9 @@ run.tools <- function(results,peak.counts,meta,tool,input.bams,ip.bams,treated.i
   if ('q' %in% tools){
     results <- cbind(results,run.qnb(peak.counts,meta))
   }
+  if ('m' %in% tools){
+    results <- cbind(results,run.metdiff(peak.counts,meta))
+  }
   return(results)
 }
 
@@ -45,6 +48,17 @@ run.qnb <- function(cnts,meta){
   #qnb.result.sim$log2.RR,qnb.result.sim$log2.OR,
   results <- as.data.frame(cbind(qnb.result.sim$pvalue,qnb.result.sim$padj))
   colnames(results) <- c("qnb.p","qnb.padj")
+  return(results)
+}
+
+run.metdiff <- function(cnts,meta){
+  meth1 <- cnts[,which(meta$Condition == 'treatment' & meta$IP == "IP")]
+  meth2 <- cnts[,which(meta$Condition != 'treatment' & meta$IP == "IP")]
+  unmeth1 <- cnts[,which(meta$Condition == 'treatment' & meta$IP == "input")]
+  unmeth2 <- cnts[,which(meta$Condition != 'treatment' & meta$IP == "input")]
+  metdiff.result <- diff.call.module(meth1,unmeth1,meth2,unmeth2)
+  results <- as.data.frame(cbind(metdiff.result$DIFF$pvalues,metdiff.result$DIFF$fdr))
+  colnames(results) <- c("metdiff.p","metdiff.padj")
   return(results)
 }
 
