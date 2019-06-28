@@ -2,4 +2,5 @@
 
 export(deq)
 import(GenomeInfoDb)
+import(S4Vectors)
 import(dplyr)
