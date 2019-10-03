@@ -134,11 +134,11 @@ prioritizeAnnotations <- function (gr, feature.order, genenames){
   strand.table <- as.data.frame(genenames)
   row.names(strand.table) <- make.names(genenames$gene_name,unique=TRUE)
   assign.feature <- !is.na(mcols(gr)[, "annot"]) & mcols(gr)[, "annot"] != "intergenic"
-  strand(gr[assign.feature,]) <- strand.table[gsub('-','.',make.names(mcols(gr)[assign.feature,"main.gene"])),"strand"]
+  GenomicRanges::strand(gr[assign.feature,]) <- strand.table[gsub('-','.',make.names(mcols(gr)[assign.feature,"main.gene"])),"strand"]
   mcols(gr)[assign.feature, "main.gene.id"] <- strand.table[gsub('-','.',make.names(mcols(gr)[assign.feature,"main.gene"])),"gene_id"]
   
   assign.feature <- is.na(mcols(gr)[, "annot"])
   mcols(gr)[assign.feature, "annot"] <- "intergenic"
-  strand(gr[assign.feature,]) <- '+' #necessary approximation for downstream functions
+  GenomicRanges::strand(gr[assign.feature,]) <- '+' #necessary approximation for downstream functions
   return(gr)
 }
