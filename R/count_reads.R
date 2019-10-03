@@ -32,7 +32,7 @@ checkBamFileList <- function (bamfiles, clean.names = TRUE) {
 }
 
 count.reads <- function(peak.data,bamfiles,paired.end,extension,sample.names = NULL,
-                        stranded = FALSE,nthreads=1){
+                        stranded = 0,nthreads=1){
     message("count reads in peaks...")
     bamfiles.filenames <- bamfiles
     bamfiles <- checkBamFileList(bamfiles)
@@ -59,8 +59,9 @@ count.reads <- function(peak.data,bamfiles,paired.end,extension,sample.names = N
                           Start = GenomicRanges::start(peaks.for.counts), End = GenomicRanges::end(peaks.for.counts), 
                           Strand = GenomicRanges::strand(peaks.for.counts))
     peak.counts <- Rsubread::featureCounts(bamfiles.filenames, 
-                                           annot.ext = peak.df, strandSpecific = stranded, allowMultiOverlap = TRUE, 
+                                           annot.ext = peak.df, allowMultiOverlap = TRUE, 
                                            nthreads = nthreads, minFragLength = 20, isPairedEnd = paired.end, readExtension3 = extension)
+    #strandSpecific = stranded, 
     peak.counts <- peak.counts$counts
     if (!is.null(sample.names)) {
       if (length(colnames(peak.counts)) == length(sample.names)) {
