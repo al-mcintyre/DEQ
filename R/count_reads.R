@@ -16,14 +16,14 @@ checkBamFileList <- function (bamfiles, clean.names = TRUE) {
   if (!is(bamfiles, "BamFileList")) {
     stop("BamFileList required")
   }
-  if (!all(file.exists(path(bamfiles)))) {
-    lost <- !file.exists(path(bamfiles))
-    stop(paste(path(bamfiles[lost]), collapse = ","), " BAMs not found")
+  if (!all(file.exists(BiocGenerics::path(bamfiles)))) {
+    lost <- !file.exists(BiocGenerics::path(bamfiles))
+    stop(paste(BiocGenerics::path(bamfiles[lost]), collapse = ","), " BAMs not found")
   }
   if (clean.names) {
     nms <- names(bamfiles)
     if (is.null(nms)) {
-      nms <- path(bamfiles)
+      nms <- BiocGenerics::path(bamfiles)
     }
     nms <- gsub("\\.bam$", "", basename(nms))
     names(bamfiles) <- make.unique(nms)
