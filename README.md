@@ -35,3 +35,5 @@ deq(input.bams, ip.bams, treated.input.bams, treated.ip.bams, peak.files,
 Output:
 1. Counts file: number of reads per peak for each input bam file (labelled as control or treatment replicates)
 2. Results file: chromosomal locations and annotations for peaks, along with significance predictions for any tools run (with and without p value adjustment), and log2 fold changes for IP reads within peaks (peak.l2fc) and input reads for associated genes (gene.l2fc) calculated using DESeq2, significance for gene expression changes between conditions from DESeq2, and the difference between peak.l2fc and gene.l2fc (diff.l2fc)
+
+Further scripts to generate figures for our [bioRxiv paper](https://www.biorxiv.org/content/10.1101/657130v2) are available [here](https://github.com/al-mcintyre/merip_reanalysis_scripts).
