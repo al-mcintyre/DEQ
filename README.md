@@ -48,6 +48,6 @@ deq(input.bams, ip.bams, treated.input.bams, treated.ip.bams, peak.files,
   gtf, paired.end = FALSE, outfi = "deq_results.txt", tool = "deq",
   compare.gene = TRUE, readlen = 50, fraglen = 100, nthreads = 1)
   ```
-from the appropriate folder (or adjust file paths). Must provide a gtf file for hg38.  
+from the appropriate folder (or adjust file paths). Must provide a gtf file for hg38. Run-time should be ~5 minutes for this demo. 
 
 Further scripts to generate figures for our [bioRxiv paper](https://www.biorxiv.org/content/10.1101/657130v2) are available [here](https://github.com/al-mcintyre/merip_reanalysis_scripts).
