@@ -20,7 +20,7 @@ BiocManager::install("exomePeak")
 install.packages("https://cran.r-project.org/src/contrib/Archive/QNB/QNB_1.1.11.tar.gz", repos = NULL, type="source")
 ```
 
-This package has been tested on MacOS (v10.13.6) and Linux (Red Hat Enterprise Linux 6.3), using R v3.6.0 and v3.6.1
+This package has been tested on MacOS (v10.13.6) and Linux (Red Hat Enterprise Linux 6.3), using R v3.6.0 and v3.6.1. Typical install time < 1 min
 
 ### Running DEQ
 
@@ -35,5 +35,19 @@ deq(input.bams, ip.bams, treated.input.bams, treated.ip.bams, peak.files,
 Output:
 1. Counts file: number of reads per peak for each input bam file (labelled as control or treatment replicates)
 2. Results file: chromosomal locations and annotations for peaks, along with significance predictions for any tools run (with and without p value adjustment), and log2 fold changes for IP reads within peaks (peak.l2fc) and input reads for associated genes (gene.l2fc) calculated using DESeq2, significance for gene expression changes between conditions from DESeq2, and the difference between peak.l2fc and gene.l2fc (diff.l2fc)
+
+Demo data is provided. After downloading, run
+``` 
+input.bams <- c('untreated_total_input_1.chr21.star.sorted.bam','untreated_total_input_2.chr21.star.sorted.bam')
+ip.bams <- c('untreated_total_IP_1.chr21.star.sorted.bam','untreated_total_IP_2.chr21.star.sorted.bam')
+treated.input.bams <- c('heatshock_total_input_1.chr21.star.sorted.bam','heatshock_total_input_2.chr21.star.sorted.bam')
+treated.ip.bams <- c('heatshock_total_IP_1.chr21.star.sorted.bam','heatshock_total_IP_2.chr21.star.sorted.bam')
+peak.files <- 'peaks.bed'
+#gtf <- location of hg38 gtf file
+deq(input.bams, ip.bams, treated.input.bams, treated.ip.bams, peak.files,
+  gtf, paired.end = FALSE, outfi = "deq_results.txt", tool = "deq",
+  compare.gene = TRUE, readlen = 50, fraglen = 100, nthreads = 1)
+  ```
+from the appropriate folder (or adjust file paths). Must provide a gtf file for hg38.  
 
 Further scripts to generate figures for our [bioRxiv paper](https://www.biorxiv.org/content/10.1101/657130v2) are available [here](https://github.com/al-mcintyre/merip_reanalysis_scripts).
